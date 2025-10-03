@@ -3,19 +3,21 @@ de números pares contidos nele. */
 
 #include <stdio.h>
 
-int tamanho;
+int tamanho; // Variável global de tamanho
 
-int obterParesVetor(int vetor[]){
-    int pares = 0;
+// Função que retorna a quantidade pares, como a quantidade é um numero positivo, foi optado pelo unsigned int
+unsigned int obterParesVetor(int *vetor){
+    unsigned int pares = 0;
     for(int i=0; i<tamanho; i++){
-        if(vetor[i] % 2 == 0){
+        if(vetor[i] % 2 == 0){  // Um número par é aquele que divide 2 e não deixa restos de divisão
             pares++;
         }
     }
     return pares;
 }
 
-int montarVetor(int vetor[]){
+// Função que monta o vetor
+int montarVetor(int *vetor){
     for(int i=0; i<tamanho; i++){
         printf("Digite o vetor[%d]: ", i+1);
         scanf("%d", &vetor[i]);
@@ -31,7 +33,7 @@ void main(){
 
     montarVetor(vetor);
 
-    int par = obterParesVetor(vetor);
+    unsigned int par = obterParesVetor(vetor);
 
-    printf("Quantidade de pares nesse vetor: %d\n", par);
+    printf("Quantidade de números pares nesse vetor: %u\n", par);
 }

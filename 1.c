@@ -8,6 +8,7 @@ c) o maior valor da matriz e sua posição (linha e coluna) */
 
 const int tamanho = 3;
 
+// Função que lê a matriz elemento por elemento
 void lerMatriz(int *matriz){
     for(int i=0; i<tamanho; i++){
         for(int j=0; j<tamanho; j++){
@@ -17,6 +18,7 @@ void lerMatriz(int *matriz){
     }
 }
 
+// Função que exibe a matriz
 void exibirMatriz(int *matriz){
     for(int i=0; i<tamanho; i++){
         for(int j=0; j<tamanho; j++){
@@ -26,6 +28,7 @@ void exibirMatriz(int *matriz){
     }
 }
 
+// Soma da diagonal principal
 int somaDiag(int *matriz){
     int soma = 0;
     for(int i=0; i<tamanho; i++){
@@ -38,24 +41,26 @@ int somaDiag(int *matriz){
     return soma;
 }
 
+// Função que retorna o maior valor e retoma por passagem de parâmetro qual linha e qual coluna tem o maior elemento
 int maiorValor(int *matriz, int *linhaMaior, int *colunaMaior){
     int maior = 0;
     for(int i=0; i<tamanho; i++){
         for(int j=0; j<tamanho; j++){
             if(*(matriz + i * tamanho + j) > maior){
-                maior = *(matriz + i * tamanho + j);
-                *linhaMaior = i;
-                *colunaMaior = j;
+                maior = *(matriz + i * tamanho + j); // Atualiza o valor maior
+                *linhaMaior = i + 1;    // Recebe a posição da linha
+                *colunaMaior = j + 1;   // Recebe a posição da coluna
             }
         }
     }
-    return maior;
+    return maior;   // Retorna o valor maior
 }
 
 
 void main(){
-    int *matriz = (int*) malloc(tamanho * tamanho * sizeof(int));
+    int *matriz = (int*) malloc(tamanho * tamanho * sizeof(int)); // Alocação dinâmica da matriz como um vetor
 
+    printf("Monte uma matriz\n");
     lerMatriz(matriz);
     
     printf("--- Matriz original ---\n");
@@ -69,7 +74,7 @@ void main(){
     printf("--- Maior Elemento ---\n");
     int linhaMaior, colunaMaior;
     int maior = maiorValor(matriz, &linhaMaior, &colunaMaior);
-    printf("Maior elemento[%d][%d]: %d\n", linhaMaior, colunaMaior, maior);
+    printf("Maior elemento encontrado em [%d][%d]: %d\n", linhaMaior, colunaMaior, maior);
 
     free(matriz);
 }

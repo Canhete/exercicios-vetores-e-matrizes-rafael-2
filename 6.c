@@ -3,26 +3,25 @@ ele aparece (ou -1 se não encontrado). */
 
 #include <stdio.h>
 
-int tamanho;
+int tamanho;    // Variável global de tamanho
 
 int procurarNum(int *vetor, int n, int pos){
-    pos++;
-    if(*vetor != n){
+    if(pos >= tamanho){ // Se percorreu todo vetor e não achou, não tem o elemento
         return -1;
     }
-    if(*vetor == n){
-        pos = ;
-        return 0;
+    if(vetor[pos] == n){    // Se achar o valor na posição tal, retorna a posição
+        return pos;
     }
-    return -1; 
+    return procurarNum(vetor, n, pos+1);     // Chamada recursiva, avança uma posição
 }
 
-int montarVetor(int vetor[]){
+// Função que monta o vetor
+int montarVetor(int *vetor){
     for(int i=0; i<tamanho; i++){
-        printf("Digite o vetor[%d]: ", i+1);
+        printf("Digite o vetor[%d]: ", i);
         scanf("%d", &vetor[i]);
     }
-    return vetor;
+    return *vetor;
 }
 
 void main(){
@@ -37,7 +36,11 @@ void main(){
     printf("Digite um número para procurar nesse vetor: ");
     scanf("%d", &numero);
 
-    int par = obterParesVetor(vetor);
+    int posicao = procurarNum(vetor, numero, 0);
 
-    printf("Quantidade de pares nesse vetor: %d\n", par);
+    if(posicao == -1){
+        printf("Número %d não foi encontrado nesse vetor!\n", numero);
+    } else {
+        printf("Número %d encontrado na posição [%d] desse vetor!\n", numero, posicao);
+    }
 }
